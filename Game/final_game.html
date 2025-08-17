@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="UTF=8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cricket</title>
+        <link rel="stylesheet" href="final_game.css">
+        <script src="final_game.js"></script>
+        <style>
+        html,body{
+          margin:0;
+          height:100%;
+        }
+        img{
+          display:block;
+          width:100%; 
+          height:100%;
+          object-fit: cover;
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          z-index: -1;
+         }
+         .panel {
+      position: absolute;
+      top: 120px;
+      left:20px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      display: inline-block;
+      width:450px;
+      height:510px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .panel-heading {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #health-bar {
+      width: 200px;
+      height: 20px;
+      background-color: lightgreen;
+      border: 1px solid darkgreen;
+      align-content: center;
+    }
+    
+    #health-bar .progress {
+      height: 100%;
+      background-color: green;
+    }
+    
+    #health-bar .progress.zero {
+      width: 0;
+    }
+    
+    #container {
+      text-align: right;
+    }
+    
+    #button {
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #button1 {
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+
+     </style>
+     <script>
+     let health = 4;
+    
+    function decreaseHealth() {
+      if (health > 0) {
+        health--;
+        const progressBar = document.getElementById('health-bar-progress');
+        progressBar.style.width = `${health * 25}%`;
+        
+        if (health === 0) {
+          const button = document.getElementById('button');
+          const button1 = document.getElementById('button1');
+          button.disabled = true;
+          button1.disabled = true;
+        }
+      }
+    }
+
+    </script>
+    </head>
+        <body>
+          <div class="panel">
+            <div class="panel-heading">POWER-UPS</div>
+            <div id="health-bar">
+              <div id="health-bar-progress" class="progress"></div>
+            </div>
+            <pre style="font-size: medium;font-family: 'Courier New', Courier, monospace;font-weight: bolder;text-align: left;">ABOUT POWERUPS :
+================================================
+  1.(PEEK)-Allows player to see the hidden 
+  fielders for 0.5 seconds before they disappear.
+  but player lose good chunk of score.
+  🥎if score>7 then costs 7 runs.
+  🥎if score less than 7 runs then a penalty
+    of 10 runs ahead in game. (MAX-USE-2)
+================================================
+  2.(DOUBLE)-Doubles the runs for next five 
+  turns.
+  🥎if score>5 then costs 5 runs.
+  🥎if score less than 5 then costs 7 runs 
+  ahead in game.
+  (MAX-USE-2)
+================================================
+</pre>
+            
+            <button id="button" onclick="blink()">PEEK 👁️</button>
+            <button id="button1" onclick="DOUBLE()">DOUBLE ✌️</button>
+          </div>
+            <img src="cricket.jpg" alt="">
+            <h1>FIELDERS: <span id="mines-count"></span></h1>
+            <h1 style="font: size 100px;font-family: 'Courier New', Courier, monospace;">SCORE:<span id="score"></span>     HIGH-SCORE-8X8:<span id="high-score"></span></h1>
+            <h1 style="font: size 80px;font-family: 'Courier New', Courier, monospace;">PENALTY:<span id="penalty"></span> 
+            <div id="board"></div>
+            <div id="animation-section"></div>
+            <button id="flag-button" onclick="resetGame()">🚩</button>
+            <br>
+            <label for="gridsize">gridsize:</label>
+            <input type="number" id="gridsize" min="6" max="10" value="8">
+            <button onclick="resetGame()">set</button>
+        </body>
+
+
+</html>
